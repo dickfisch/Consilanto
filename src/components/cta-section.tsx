@@ -5,21 +5,55 @@ import { Container } from "./ui";
 import { Reveal } from "./reveal";
 import { abschluss, footer, nav, brand } from "@/lib/content";
 
+type Status = "idle" | "sending" | "success" | "error";
+
 function ContactForm() {
   const [agreed, setAgreed] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (status === "sending") return;
     const data = new FormData(e.currentTarget);
-    const name = String(data.get("name") || "");
-    const email = String(data.get("email") || "");
-    const message = String(data.get("message") || "");
-    const body = encodeURIComponent(
-      `Name: ${name}\nE-Mail: ${email}\n\n${message}`,
-    );
-    const subject = encodeURIComponent("Anfrage Erstgespräch");
-    window.location.href = `mailto:${footer.email}?subject=${subject}&body=${body}`;
+    setStatus("sending");
+    setErrorMsg("");
+    try {
+      const res = await fetch("/api/kontakt", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          message: data.get("message"),
+          company: data.get("company"), // Honeypot
+        }),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (res.ok && json.ok) {
+        setStatus("success");
+      } else {
+        setStatus("error");
+        setErrorMsg(json.error || "Versand fehlgeschlagen. Bitte später erneut versuchen.");
+      }
+    } catch {
+      setStatus("error");
+      setErrorMsg("Keine Verbindung. Bitte später erneut versuchen.");
+    }
   };
+
+  if (status === "success") {
+    return (
+      <div className="mt-10 border-t border-line-dark pt-10">
+        <p className="font-serif text-2xl">Vielen Dank für Ihre Anfrage.</p>
+        <p className="body-copy mt-4 text-dark-body">
+          Wir haben Ihre Nachricht erhalten und melden uns zeitnah bei Ihnen.
+        </p>
+      </div>
+    );
+  }
+
+  const sending = status === "sending";
 
   return (
     <form onSubmit={onSubmit} className="mt-10">
@@ -53,6 +87,14 @@ function ContactForm() {
         </label>
       </div>
 
+      {/* Honeypot: für Menschen unsichtbar, nur Bots füllen es aus. */}
+      <div aria-hidden className="absolute left-[-9999px] top-auto h-0 w-0 overflow-hidden">
+        <label>
+          Firma (bitte freilassen)
+          <input name="company" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
+
       <label className="mt-8 flex cursor-pointer items-center gap-3 text-sm font-light text-dark-body">
         <input
           type="checkbox"
@@ -64,13 +106,17 @@ function ContactForm() {
         Ich stimme der Datenschutzerklärung zu.
       </label>
 
+      {status === "error" ? (
+        <p className="mt-6 text-sm text-red-300">{errorMsg}</p>
+      ) : null}
+
       <button
         type="submit"
-        disabled={!agreed}
+        disabled={!agreed || sending}
         className="mt-8 inline-flex items-center gap-3 bg-white px-9 py-4 text-xs font-medium uppercase tracking-[0.22em] text-ink transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-40"
       >
-        Senden
-        <span aria-hidden>→</span>
+        {sending ? "Wird gesendet…" : "Senden"}
+        {!sending && <span aria-hidden>→</span>}
       </button>
     </form>
   );
