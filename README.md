@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Consilanto — Website
 
-## Getting Started
+Unabhängige Honorarberatung. One-Pager, gebaut mit **Next.js 16 (App Router)**, **TypeScript** und **Tailwind CSS v4**.
 
-First, run the development server:
+## Entwicklung
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev      # Dev-Server (http://localhost:3000)
+npm run build    # Produktions-Build
+npm run start    # gebaute Seite lokal starten
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Struktur
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+  app/
+    layout.tsx        Fonts (Cormorant Garamond + Inter), Metadaten/SEO
+    page.tsx          Reihenfolge der Sektionen
+    globals.css       Design-Tokens (Farben, Fonts) + Scroll-Animationen
+  components/
+    site-header.tsx   Sticky-Nav (transparent über Hero → fest beim Scrollen)
+    hero.tsx          Hero mit Video-Hintergrund
+    sections.tsx      Person, Metaebene, Zeit, Haltung, Angebot, Für wen, Vertrauen
+    cta-section.tsx   Abschluss / Kontakt
+    site-footer.tsx   Footer
+    reveal.tsx        Scroll-Einblend-Animation
+    ui.tsx            Kleinteile (Container, Eyebrow, AccentLines)
+  lib/
+    content.ts        >>> ALLE TEXTE zentral hier <<<
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Inhalte pflegen
 
-## Learn More
+- **Texte:** komplett in `src/lib/content.ts`.
+- **Bilder/Video:** in `public/img/` und `public/media/`. Aktuell Platzhalter
+  (`erol-key.jpg`, `hero.mp4`) — einfach gleichnamig ersetzen.
+- **Farben/Fonts:** Design-Tokens oben in `src/app/globals.css` (`@theme`).
 
-To learn more about Next.js, take a look at the following resources:
+## Design
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Monochromes Editorial im Stil der Referenz (maximafinance.co.uk):
+reines Schwarz-Weiß, dünne Versal-Sans-Headlines (Montserrat) mit kursiven
+Serif-Akzenten (Playfair Display), große römisch nummerierte Serif-Listen mit
+Unterstrichen, dunkle Bild-Sektionen, vertikale Navigationsleiste links
+(invertiert via `mix-blend-difference`), viel Weißraum, dezente Scroll-Reveals.
+`?reveal=off` an die URL hängen blendet alle Animationen sofort ein
+(praktisch für Screenshots/Tests).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Optimiert für **Vercel** (Repo importieren genügt). Alternativ jeder
+Node-Host via `npm run build && npm run start`.

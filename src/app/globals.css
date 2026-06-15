@@ -1,26 +1,186 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ------------------------------------------------------------------ */
+/*  Design tokens — Consilanto                                         */
+/*  Monochrom, editorial. Angelehnt an die Referenz: reines            */
+/*  Schwarz-Weiß, dünne Versal-Sans, elegante Serif-Akzente.           */
+/* ------------------------------------------------------------------ */
+@theme {
+  --color-paper: #ffffff;
+  --color-ink: #0a0a0a;
+  --color-body: #595959;
+  --color-line: #e4e2dd;
+  --color-dark: #000000;
+  --color-dark-2: #0c0c0c;
+  --color-dark-body: #e5e5e5;
+  --color-dark-muted: rgba(255, 255, 255, 0.42);
+  --color-line-dark: rgba(255, 255, 255, 0.16);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-montserrat);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ------------------------------------------------------------------ */
+/*  Proportionaler Desktop-Modus                                       */
+/*  1rem skaliert LINEAR mit der Viewport-Breite. Referenzbreite       */
+/*  --design-w (1536px) → 1rem = 16px. Alles, was in rem definiert ist */
+/*  (Schrift, Abstände, Breiten via Tailwind), zoomt proportional mit. */
+/*  Knob: Referenzbreite = 1536px. Teiler = 1536 / 16 = 96.            */
+/*  Andere Referenzbreite gewünscht? Teiler = Breite / 16 neu setzen.  */
+/*  TODO (später): min/max begrenzen, z.B.                             */
+/*    font-size: clamp(13px, 100vw / 96, 22px);                        */
+/*  Aktuell bewusst OHNE Grenzen, um das Verhalten auf 4K zu sehen.    */
+/* ------------------------------------------------------------------ */
+html {
+  /* Mobile/Tablet (<1024px): feste, gut lesbare Basis. Schrift skaliert
+     hier NICHT mit der Breite – das Layout bricht stattdessen um. */
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Desktop (≥1024px): proportionaler Zoom – 1rem skaliert mit der Breite. */
+@media (min-width: 1024px) {
+  html {
+    font-size: calc(100vw / 96);
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Lenis Smooth-Scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+/* Serifen-Display (Playfair) */
+.font-serif {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+/* Dünne Versal-Headline im Stil der Referenz */
+.display {
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 200;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.04;
+}
+
+/* Kleines, weit gesperrtes Label */
+.eyebrow {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+/* Grauer Editorial-Fließtext. In @layer base, damit Farb-Utilities wie
+   text-dark-body (dunkle Sektionen) die Standardfarbe überschreiben können. */
+@layer base {
+  .body-copy {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    font-weight: 300;
+    color: var(--color-body);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Scroll reveal — dezent                                             */
+/* ------------------------------------------------------------------ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 1s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Vertikale Navigations-Labels (linke Leiste) */
+.vertical-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.18em;
+}
+
+/* Process-Headline: per JS togglebar – „stacked" stapelt die Wörter (Intro,
+   groß), ohne die Klasse stehen sie in einer Zeile (angedockt, klein). */
+.proc-headline > span {
+  display: inline;
+}
+.proc-headline.stacked > span {
+  display: block;
+}
+
+/* Monochromes Medium */
+.is-grayscale {
+  filter: grayscale(1) contrast(1.02);
+}
+
+/* Ablauf: EIN durchgehendes Bild. Beim Hover dunkelt die Spalte UNTER der
+   Maus ab und das Bild dahinter wird leicht unscharf. Text bleibt scharf. */
+.col-dim {
+  background: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(0);
+  transition:
+    background 0.5s ease,
+    backdrop-filter 0.5s ease,
+    -webkit-backdrop-filter 0.5s ease;
+}
+@media (hover: hover) and (min-width: 1024px) {
+  .panel-col:hover .col-dim {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+  }
 }
