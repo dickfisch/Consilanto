@@ -1,9 +1,14 @@
+"use client";
+
+import { tinaField } from "tinacms/dist/react";
 import { Container } from "./ui";
 import { Reveal } from "./reveal";
 import { HeroVideo } from "./hero-video";
-import { hero } from "@/lib/content";
+import { useSiteContent, useTinaHome } from "@/lib/site-content";
 
 export function Hero() {
+  const { hero } = useSiteContent();
+  const home = useTinaHome();
   return (
     <section
       id="top"
@@ -30,12 +35,20 @@ export function Hero() {
           <Reveal>
             <div className="flex items-center gap-3">
               <span className="h-px w-10 bg-ink/40" aria-hidden />
-              <span className="eyebrow text-ink/60">{hero.tagline}</span>
+              <span
+                className="eyebrow text-ink/60"
+                data-tina-field={tinaField(home.hero, "tagline")}
+              >
+                {hero.tagline}
+              </span>
             </div>
           </Reveal>
 
           <Reveal delay={120}>
-            <h1 className="display mt-8 text-[2.4rem] lg:text-[6.4rem] text-ink">
+            <h1
+              className="display mt-8 text-[2.4rem] lg:text-[6.4rem] text-ink"
+              data-tina-field={tinaField(home.hero, "headlineParts")}
+            >
               {hero.headlineParts.map((part, i) =>
                 part.italic ? (
                   <em
@@ -59,19 +72,29 @@ export function Hero() {
 
 /* Weißer Intro-Abschnitt direkt unter dem Hero — Fließtext + CTA, zentriert. */
 export function HeroIntro() {
+  const { hero } = useSiteContent();
+  const home = useTinaHome();
   return (
     <section className="bg-paper text-ink py-24 sm:py-32 lg:py-40">
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <Reveal>
-            <p className="body-copy mx-auto max-w-xl">{hero.body}</p>
+            <p
+              className="body-copy mx-auto max-w-xl"
+              data-tina-field={tinaField(home.hero, "body")}
+            >
+              {hero.body}
+            </p>
           </Reveal>
           <Reveal delay={140}>
             <a
               href="#kontakt"
               className="group mt-10 inline-flex items-center gap-4 text-sm font-light uppercase tracking-[0.22em] text-ink"
             >
-              <span className="border-b border-ink/40 pb-1 transition-colors group-hover:border-ink">
+              <span
+                className="border-b border-ink/40 pb-1 transition-colors group-hover:border-ink"
+                data-tina-field={tinaField(home.hero, "cta")}
+              >
                 {hero.cta}
               </span>
               <span className="transition-transform duration-300 group-hover:translate-x-1">

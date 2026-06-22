@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { tinaField } from "tinacms/dist/react";
 import { Container, Eyebrow } from "./ui";
-import { haltung } from "@/lib/content";
+import { useSiteContent, useTinaHome } from "@/lib/site-content";
 
 const clamp = (v: number, min: number, max: number) =>
   Math.max(min, Math.min(max, v));
@@ -45,6 +46,8 @@ function activeStep(mp: number) {
 }
 
 export function HaltungSection() {
+  const { haltung } = useSiteContent();
+  const home = useTinaHome();
   const sectionRef = useRef<HTMLElement>(null);
   const deskRefs = useRef<(HTMLParagraphElement | null)[]>([]);
   const mobAreaRef = useRef<HTMLDivElement>(null);
@@ -114,12 +117,20 @@ export function HaltungSection() {
           <Container className="w-full">
             <div className="grid gap-x-16 lg:grid-cols-12">
               <div className="lg:col-span-6">
-                <Eyebrow>{haltung.eyebrow}</Eyebrow>
-                <h2 className="font-serif mt-8 text-[3.5rem] font-normal leading-[1.1] tracking-[-0.01em]">
+                <Eyebrow tinaField={tinaField(home.haltung, "eyebrow")}>
+                {haltung.eyebrow}
+              </Eyebrow>
+                <h2
+                  className="font-serif mt-8 text-[3.5rem] font-normal leading-[1.1] tracking-[-0.01em]"
+                  data-tina-field={tinaField(home.haltung, "title")}
+                >
                   {haltung.title}
                 </h2>
               </div>
-              <div className="space-y-5 lg:col-span-5 lg:col-start-8">
+              <div
+                className="space-y-5 lg:col-span-5 lg:col-start-8"
+                data-tina-field={tinaField(home.haltung, "body")}
+              >
                 {haltung.body.map((para, i) => (
                   <p key={i} className="body-copy">
                     {para}
@@ -128,7 +139,10 @@ export function HaltungSection() {
               </div>
             </div>
 
-            <div className="mt-20 space-y-14">
+            <div
+              className="mt-20 space-y-14"
+              data-tina-field={tinaField(home.haltung, "pledges")}
+            >
               {haltung.pledges.map((pledge, i) => {
                 const { first, rest } = splitPledge(pledge);
                 return (
@@ -157,10 +171,16 @@ export function HaltungSection() {
         {/* Kopf — normaler Fluss, scrollt weg (nicht sticky) */}
         <Container className="pb-4 pt-28">
           <Eyebrow>{haltung.eyebrow}</Eyebrow>
-          <h2 className="font-serif mt-6 text-[1.9rem] font-normal leading-[1.1] tracking-[-0.01em]">
+          <h2
+            className="font-serif mt-6 text-[1.9rem] font-normal leading-[1.1] tracking-[-0.01em]"
+            data-tina-field={tinaField(home.haltung, "title")}
+          >
             {haltung.title}
           </h2>
-          <div className="mt-8 space-y-5">
+          <div
+            className="mt-8 space-y-5"
+            data-tina-field={tinaField(home.haltung, "body")}
+          >
             {haltung.body.map((para, i) => (
               <p key={i} className="body-copy">
                 {para}

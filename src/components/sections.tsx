@@ -1,15 +1,11 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { tinaField } from "tinacms/dist/react";
 import { Container, Eyebrow } from "./ui";
 import { Reveal } from "./reveal";
 import { AngebotThemes } from "./angebot-themes";
-import {
-  person,
-  meta,
-  angebot,
-  fuerWen,
-  vertrauen,
-  ROMAN,
-} from "@/lib/content";
+import { useSiteContent, useTinaHome } from "@/lib/site-content";
 
 /* ------------------------------------------------------------------ */
 /*  Bausteine                                                          */
@@ -66,24 +62,28 @@ function SerifTitle({
 /*  02 — Die Person                                                    */
 /* ------------------------------------------------------------------ */
 export function PersonSection() {
+  const { person } = useSiteContent();
+  const home = useTinaHome();
   return (
     <SectionShell id={person.id}>
       <Reveal>
-        <Eyebrow>{person.eyebrow}</Eyebrow>
+        <Eyebrow tinaField={tinaField(home.person, "eyebrow")}>
+          {person.eyebrow}
+        </Eyebrow>
       </Reveal>
       <div className="mt-12 grid gap-x-16 gap-y-12 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <Reveal delay={100}>
+          <Reveal delay={100} tinaField={tinaField(home.person, "title")}>
             <SerifTitle>{person.title}</SerifTitle>
           </Reveal>
         </div>
         <div className="lg:col-span-4 lg:col-start-9">
-          <Reveal delay={180}>
+          <Reveal delay={180} tinaField={tinaField(home.person, "intro")}>
             <p className="font-serif text-xl italic leading-relaxed text-ink/80">
               {person.intro}
             </p>
           </Reveal>
-          <Reveal delay={260}>
+          <Reveal delay={260} tinaField={tinaField(home.person, "accents")}>
             <ul className="mt-6 space-y-1">
               {person.accents.map((a) => (
                 <li
@@ -95,7 +95,10 @@ export function PersonSection() {
               ))}
             </ul>
           </Reveal>
-          <div className="mt-7 space-y-5">
+          <div
+            className="mt-7 space-y-5"
+            data-tina-field={tinaField(home.person, "body")}
+          >
             {person.body.map((p, i) => (
               <Reveal key={i} as="p" delay={i * 90} className="body-copy">
                 {p}
@@ -112,6 +115,8 @@ export function PersonSection() {
 /*  03 — Die Metaebene (zentriertes Statement)                         */
 /* ------------------------------------------------------------------ */
 export function MetaSection() {
+  const { meta } = useSiteContent();
+  const home = useTinaHome();
   return (
     <section id={meta.id} className="scroll-mt-0 bg-paper text-ink">
       {/* Trennlinie am Abschnitts-Übergang — inhaltsbreit & zentriert. Oben das
@@ -124,15 +129,20 @@ export function MetaSection() {
       <Container className="py-28 sm:py-36 lg:py-48">
         <div className="mx-auto max-w-4xl text-center">
         <Reveal className="flex justify-center">
-          <Eyebrow>{meta.eyebrow}</Eyebrow>
+          <Eyebrow tinaField={tinaField(home.meta, "eyebrow")}>
+            {meta.eyebrow}
+          </Eyebrow>
         </Reveal>
-        <Reveal delay={120}>
+        <Reveal delay={120} tinaField={tinaField(home.meta, "title")}>
           <SerifTitle className="mt-10">{meta.title}</SerifTitle>
         </Reveal>
-        <Reveal delay={220}>
+        <Reveal delay={220} tinaField={tinaField(home.meta, "intro")}>
           <p className="body-copy mx-auto mt-9 max-w-xl">{meta.intro}</p>
         </Reveal>
-        <div className="mx-auto mt-8 max-w-3xl">
+        <div
+          className="mx-auto mt-8 max-w-3xl"
+          data-tina-field={tinaField(home.meta, "accents")}
+        >
           {meta.accents.map((a, i) => (
             <Reveal
               key={a}
@@ -145,7 +155,7 @@ export function MetaSection() {
             </Reveal>
           ))}
         </div>
-        <Reveal delay={120}>
+        <Reveal delay={120} tinaField={tinaField(home.meta, "body")}>
           <p className="body-copy mx-auto mt-10 max-w-2xl">{meta.body[0]}</p>
         </Reveal>
         </div>
@@ -165,17 +175,21 @@ export { HaltungSection } from "./haltung-section";
 /*  06 — Mein Angebot (große Serif-Liste — Signatur der Referenz)      */
 /* ------------------------------------------------------------------ */
 export function AngebotSection() {
+  const { angebot } = useSiteContent();
+  const home = useTinaHome();
   return (
     <SectionShell id={angebot.id} className="border-t border-line">
       <div className="grid gap-x-16 gap-y-10 lg:grid-cols-12">
         <div className="lg:col-span-6">
           <Reveal>
-            <Eyebrow>{angebot.eyebrow}</Eyebrow>
+            <Eyebrow tinaField={tinaField(home.angebot, "eyebrow")}>
+              {angebot.eyebrow}
+            </Eyebrow>
           </Reveal>
-          <Reveal delay={120}>
+          <Reveal delay={120} tinaField={tinaField(home.angebot, "title")}>
             <SerifTitle className="mt-10">{angebot.title}</SerifTitle>
           </Reveal>
-          <Reveal delay={200}>
+          <Reveal delay={200} tinaField={tinaField(home.angebot, "pillars")}>
             <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-2">
               {angebot.pillars.map((pillar) => (
                 <li
@@ -189,21 +203,27 @@ export function AngebotSection() {
           </Reveal>
         </div>
         <div className="lg:col-span-4 lg:col-start-9">
-          <Reveal delay={160}>
+          <Reveal delay={160} tinaField={tinaField(home.angebot, "intro")}>
             <p className="body-copy">{angebot.intro}</p>
           </Reveal>
-          <Reveal delay={240}>
+          <Reveal delay={240} tinaField={tinaField(home.angebot, "bridge")}>
             <p className="body-copy mt-5">{angebot.bridge}</p>
           </Reveal>
         </div>
       </div>
 
       {/* Klickbare Themen — öffnen ein Overlay mit Detailtext */}
-      <AngebotThemes themes={angebot.themes} />
+      <div data-tina-field={tinaField(home.angebot, "themes")}>
+        <AngebotThemes themes={angebot.themes} />
+      </div>
 
       <div className="mt-16 grid gap-10 sm:grid-cols-2">
         {angebot.contrasts.map((c, i) => (
-          <Reveal key={c.to} delay={i * 120}>
+          <Reveal
+            key={c.to}
+            delay={i * 120}
+            tinaField={tinaField(home.angebot, "contrasts")}
+          >
             <p className="text-sm font-light uppercase tracking-[0.18em] text-ink/60">
               {c.from}
             </p>
@@ -219,21 +239,25 @@ export function AngebotSection() {
 /*  07 — Für wen das richtig ist                                       */
 /* ------------------------------------------------------------------ */
 export function FuerWenSection() {
+  const { fuerWen, ROMAN } = useSiteContent();
+  const home = useTinaHome();
   return (
     <SectionShell id={fuerWen.id} dark>
       <div className="grid gap-x-16 gap-y-12 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <Reveal>
-            <Eyebrow tone="light">{fuerWen.eyebrow}</Eyebrow>
+            <Eyebrow tone="light" tinaField={tinaField(home.fuerWen, "eyebrow")}>
+              {fuerWen.eyebrow}
+            </Eyebrow>
           </Reveal>
-          <Reveal delay={120}>
+          <Reveal delay={120} tinaField={tinaField(home.fuerWen, "title")}>
             <SerifTitle dark className="mt-10">
               {fuerWen.title}
             </SerifTitle>
           </Reveal>
         </div>
         <div className="lg:col-span-6 lg:col-start-7">
-          <ul>
+          <ul data-tina-field={tinaField(home.fuerWen, "audience")}>
             {fuerWen.audience.map((line, i) => (
               <Reveal
                 key={i}
@@ -250,7 +274,7 @@ export function FuerWenSection() {
               </Reveal>
             ))}
           </ul>
-          <Reveal delay={120}>
+          <Reveal delay={120} tinaField={tinaField(home.fuerWen, "body")}>
             <p className="body-copy mt-9 text-dark-body">{fuerWen.body}</p>
           </Reveal>
         </div>
@@ -263,16 +287,23 @@ export function FuerWenSection() {
 /*  08 — Warum Menschen bleiben (zentriertes Statement)                */
 /* ------------------------------------------------------------------ */
 export function VertrauenSection() {
+  const { vertrauen } = useSiteContent();
+  const home = useTinaHome();
   return (
     <SectionShell id={vertrauen.id}>
       <div className="mx-auto max-w-4xl text-center">
         <Reveal className="flex justify-center">
-          <Eyebrow>{vertrauen.eyebrow}</Eyebrow>
+          <Eyebrow tinaField={tinaField(home.vertrauen, "eyebrow")}>
+            {vertrauen.eyebrow}
+          </Eyebrow>
         </Reveal>
-        <Reveal delay={120}>
+        <Reveal delay={120} tinaField={tinaField(home.vertrauen, "lead")}>
           <p className="body-copy mt-9">{vertrauen.lead}</p>
         </Reveal>
-        <div className="mt-8 space-y-3">
+        <div
+          className="mt-8 space-y-3"
+          data-tina-field={tinaField(home.vertrauen, "statements")}
+        >
           {vertrauen.statements.map((s, i) => (
             <Reveal key={i} delay={i * 130}>
               <SerifTitle className={i === 0 ? "" : "italic text-ink/70"}>

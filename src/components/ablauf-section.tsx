@@ -1,8 +1,13 @@
+"use client";
+
+import { tinaField } from "tinacms/dist/react";
 import { Container } from "./ui";
 import { Reveal } from "./reveal";
-import { ablauf, ROMAN } from "@/lib/content";
+import { useSiteContent, useTinaHome } from "@/lib/site-content";
 
 export function AblaufSection() {
+  const { ablauf, ROMAN } = useSiteContent();
+  const home = useTinaHome();
   return (
     <section
       id={ablauf.id}
@@ -27,10 +32,18 @@ export function AblaufSection() {
           durchklickbar (pointer-events-none), damit der Spalten-Hover greift. */}
       <Container className="pointer-events-none relative z-30 inset-x-0 top-0 pt-28 pb-4 text-center sm:pt-36 lg:absolute lg:pb-0 lg:pt-44">
         <Reveal className="flex justify-center">
-          <span className="eyebrow text-white/60">{ablauf.eyebrow}</span>
+          <span
+            className="eyebrow text-white/60"
+            data-tina-field={tinaField(home.ablauf, "eyebrow")}
+          >
+            {ablauf.eyebrow}
+          </span>
         </Reveal>
         <Reveal delay={120}>
-          <h2 className="display mx-auto mt-8 max-w-5xl text-[2.4rem] lg:text-[5.8rem] text-white">
+          <h2
+            className="display mx-auto mt-8 max-w-5xl text-[2.4rem] lg:text-[5.8rem] text-white"
+            data-tina-field={tinaField(home.ablauf, "headlineParts")}
+          >
             {ablauf.headlineParts.map((part, i) =>
               part.italic ? (
                 <em
@@ -53,6 +66,7 @@ export function AblaufSection() {
           <a
             key={step.title}
             href={step.href}
+            data-tina-field={tinaField(home.ablauf.steps[i])}
             className="panel-col group relative flex min-h-[72vh] flex-col items-center justify-center overflow-hidden border-t border-white/15 px-8 pb-20 pt-16 text-center lg:min-h-[122vh] lg:justify-end [&:first-child]:border-t-0 lg:border-l lg:border-t-0 lg:[&:first-child]:border-l-0"
           >
             {/* Dim-/Blur-Schicht: aktiv wenn DIESE Spalte gehovert wird */}

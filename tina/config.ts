@@ -48,6 +48,7 @@ export default defineConfig({
         path: "content/home",
         format: "json",
         // Einzelseite: kein Anlegen/Löschen, nur Bearbeiten.
+        // `router` → visueller Editor mit Live-Vorschau der Startseite ("/").
         ui: {
           allowedActions: { create: false, delete: false },
           router: () => "/",

@@ -2,8 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Container } from "./ui";
+import { tinaField } from "tinacms/dist/react";
 import { DiamondObject } from "./diamond-object";
-import { prozess } from "@/lib/content";
+import { useSiteContent, useTinaHome } from "@/lib/site-content";
 import { getLenis, isExitSnapSuppressed } from "@/lib/lenis";
 
 const clamp = (v: number, min: number, max: number) =>
@@ -46,6 +47,8 @@ const STEP_POS = [
 ];
 
 export function ProcessScroll() {
+  const { prozess } = useSiteContent();
+  const home = useTinaHome();
   const sectionRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
@@ -299,6 +302,7 @@ export function ProcessScroll() {
           {steps.map((step, i) => (
             <div
               key={i}
+              data-tina-field={tinaField(home.prozess.steps[i])}
               style={isMobile ? undefined : { left: STEP_POS[i].left, top: STEP_POS[i].top }}
               className={`absolute transition-all duration-700 ${
                 isMobile
@@ -353,6 +357,7 @@ export function ProcessScroll() {
             ref={eyebrowRef}
             className="eyebrow text-dark-muted"
             style={{ opacity: 0 }}
+            data-tina-field={tinaField(home.prozess, "eyebrow")}
           >
             {prozess.eyebrow}
           </span>

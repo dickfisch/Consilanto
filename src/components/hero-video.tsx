@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { media } from "@/lib/content";
+import { useSiteContent } from "@/lib/site-content";
 
 /**
  * Hero-Hintergrundvideo. iOS zeigt sonst einen Play-Button, wenn das Autoplay
@@ -9,6 +9,7 @@ import { media } from "@/lib/content";
  * play() aktiv auf, sodass es überall (auch mobil) ohne Button autoplayt.
  */
 export function HeroVideo() {
+  const { media } = useSiteContent();
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {

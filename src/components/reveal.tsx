@@ -10,13 +10,21 @@ type RevealProps = {
   /** Wrapper-Element (default: div) */
   as?: ElementType;
   className?: string;
+  /** Optionaler TinaCMS-Klick-zum-Bearbeiten-Marker. */
+  tinaField?: string;
 };
 
 /**
  * Blendet Inhalte sanft ein, sobald sie in den Viewport scrollen.
  * Respektiert prefers-reduced-motion über CSS (siehe globals.css).
  */
-export function Reveal({ children, delay = 0, as, className }: RevealProps) {
+export function Reveal({
+  children,
+  delay = 0,
+  as,
+  className,
+  tinaField,
+}: RevealProps) {
   const Tag = (as ?? "div") as ElementType;
   const ref = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
@@ -55,6 +63,7 @@ export function Reveal({ children, delay = 0, as, className }: RevealProps) {
     {
       ref,
       "data-reveal": "",
+      "data-tina-field": tinaField,
       className: [visible ? "is-visible" : "", className]
         .filter(Boolean)
         .join(" "),
