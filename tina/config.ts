@@ -37,6 +37,8 @@ export default defineConfig({
     tina: {
       mediaRoot: "",
       publicFolder: "public",
+      // Erlaubt Editoren das Hochladen/Ersetzen von Bildern/Videos im /admin.
+      static: false,
     },
   },
 
