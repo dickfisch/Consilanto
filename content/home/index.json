@@ -5,20 +5,10 @@
   "hero": {
     "tagline": "Unabhängige Honorarberatung",
     "headlineParts": [
-      {
-        "text": "Luxus",
-        "italic": true
-      },
-      {
-        "text": " ist, die eigene "
-      },
-      {
-        "text": "Zukunft",
-        "italic": true
-      },
-      {
-        "text": " selbst zu gestalten."
-      }
+      { "text": "Luxus", "italic": true },
+      { "text": " ist, die eigene " },
+      { "text": "Zukunft", "italic": true },
+      { "text": " selbst zu gestalten." }
     ],
     "body": "Bei Finanzen geht es immer auch um Zeit: um Chancen, den richtigen Moment und einen Weg, der langfristig trägt. Consilanto begleitet Sie persönlich dabei, finanzielle Klarheit zu schaffen und aus Ihren Zielen eine unabhängige Strategie zu entwickeln.",
     "cta": "Erstgespräch anfragen"
@@ -59,13 +49,8 @@
   "prozess": {
     "eyebrow": "Zeit als strategischer Faktor",
     "headlineParts": [
-      {
-        "text": "Zeit ist "
-      },
-      {
-        "text": "Strategie",
-        "italic": true
-      }
+      { "text": "Zeit ist " },
+      { "text": "Strategie", "italic": true }
     ],
     "steps": [
       {
@@ -111,52 +96,23 @@
     ],
     "bridge": "Aus dieser Perspektive entsteht eine Beratung, die nicht isoliert denkt, sondern vernetzt:",
     "themes": [
-      {
-        "title": "Vermögensaufbau",
-        "note": "Struktur für langfristiges Wachstum."
-      },
-      {
-        "title": "Absicherung",
-        "note": "Risiken erkennen, bevor sie entstehen."
-      },
-      {
-        "title": "Altersvorsorge",
-        "note": "Heute die Weichen für später stellen."
-      },
-      {
-        "title": "Liquidität",
-        "note": "Handlungsfähig bleiben in jeder Phase."
-      },
-      {
-        "title": "Krankenversicherung",
-        "note": "Schutz, der zu Ihrem Leben passt."
-      },
-      {
-        "title": "Immobilien & Finanzierung",
-        "note": "Entscheidungen mit Tragweite begleiten."
-      }
+      { "title": "Vermögensaufbau", "note": "Struktur für langfristiges Wachstum." },
+      { "title": "Absicherung", "note": "Risiken erkennen, bevor sie entstehen." },
+      { "title": "Altersvorsorge", "note": "Heute die Weichen für später stellen." },
+      { "title": "Liquidität", "note": "Handlungsfähig bleiben in jeder Phase." },
+      { "title": "Krankenversicherung", "note": "Schutz, der zu Ihrem Leben passt." },
+      { "title": "Immobilien & Finanzierung", "note": "Entscheidungen mit Tragweite begleiten." }
     ],
     "contrasts": [
-      {
-        "from": "Das Ziel ist nicht mehr Komplexität.",
-        "to": "Sondern weniger Unsicherheit."
-      },
-      {
-        "from": "Nicht mehr Produkte.",
-        "to": "Sondern bessere Entscheidungen."
-      }
+      { "from": "Das Ziel ist nicht mehr Komplexität.", "to": "Sondern weniger Unsicherheit." },
+      { "from": "Nicht mehr Produkte.", "to": "Sondern bessere Entscheidungen." }
     ]
   },
   "ablauf": {
     "eyebrow": "So arbeiten wir zusammen",
     "headlineParts": [
-      {
-        "text": "In drei Schritten zu Ihrer "
-      },
-      {
-        "text": "Strategie",
-        "italic": true
-      }
+      { "text": "In drei Schritten zu Ihrer " },
+      { "text": "Strategie", "italic": true }
     ],
     "steps": [
       {
