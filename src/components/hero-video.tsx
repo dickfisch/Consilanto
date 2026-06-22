@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { media } from "@/lib/content";
 
 /**
  * Hero-Hintergrundvideo. iOS zeigt sonst einen Play-Button, wenn das Autoplay
@@ -38,9 +39,9 @@ export function HeroVideo() {
       playsInline
       controls={false}
       disablePictureInPicture
-      poster="/img/erol-key.jpg"
+      poster={media.editorialImage}
     >
-      <source src="/media/hero.mp4" type="video/mp4" />
+      <source src={media.heroVideo} type="video/mp4" />
     </video>
   );
 }

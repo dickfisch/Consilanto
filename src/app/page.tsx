@@ -12,7 +12,7 @@ import { ProcessScroll } from "@/components/process-scroll";
 import { AblaufSection } from "@/components/ablauf-section";
 import { ImageBand } from "@/components/image-band";
 import { CtaSection } from "@/components/cta-section";
-import { brand } from "@/lib/content";
+import { brand, media } from "@/lib/content";
 
 export default function Home() {
   return (
@@ -26,7 +26,7 @@ export default function Home() {
         <ProcessScroll />
         <HaltungSection />
         <ImageBand
-          src="/img/erol-key.jpg"
+          src={media.editorialImage}
           quote={brand.tagline}
           cite="Consilanto"
         />
