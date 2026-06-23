@@ -41,7 +41,7 @@ export function AblaufSection() {
         </Reveal>
         <Reveal delay={120}>
           <h2
-            className="display mx-auto mt-8 max-w-5xl text-[2.4rem] lg:text-[5.8rem] text-white"
+            className="display mx-auto mt-8 max-w-5xl text-[calc(2.4rem*var(--scale-heading))] lg:text-[calc(5.8rem*var(--scale-heading))] text-white"
             data-tina-field={tinaField(home.ablauf, "headlineParts")}
           >
             {ablauf.headlineParts.map((part, i) =>

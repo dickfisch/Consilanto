@@ -121,7 +121,7 @@ export function HaltungSection() {
                 {haltung.eyebrow}
               </Eyebrow>
                 <h2
-                  className="font-serif mt-8 text-[3.5rem] font-normal leading-[1.1] tracking-[-0.01em]"
+                  className="font-serif mt-8 text-[calc(3.5rem*var(--scale-heading))] font-normal leading-[1.1] tracking-[-0.01em]"
                   data-tina-field={tinaField(home.haltung, "title")}
                 >
                   {haltung.title}
@@ -172,7 +172,7 @@ export function HaltungSection() {
         <Container className="pb-4 pt-28">
           <Eyebrow>{haltung.eyebrow}</Eyebrow>
           <h2
-            className="font-serif mt-6 text-[1.9rem] font-normal leading-[1.1] tracking-[-0.01em]"
+            className="font-serif mt-6 text-[calc(1.9rem*var(--scale-heading))] font-normal leading-[1.1] tracking-[-0.01em]"
             data-tina-field={tinaField(home.haltung, "title")}
           >
             {haltung.title}

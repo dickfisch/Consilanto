@@ -56,6 +56,50 @@ export default defineConfig({
           router: () => "/",
         },
         fields: [
+          // --- Textgrößen --------------------------------------------
+          {
+            type: "object",
+            name: "typeScale",
+            label: "Textgrößen",
+            description:
+              "Skaliert ganze Textgruppen proportional. Standard = unverändert.",
+            fields: [
+              {
+                type: "string",
+                name: "headings",
+                label: "Überschriften",
+                options: [
+                  { value: "0.9", label: "Klein" },
+                  { value: "1", label: "Standard" },
+                  { value: "1.1", label: "Groß" },
+                  { value: "1.25", label: "Sehr groß" },
+                ],
+              },
+              {
+                type: "string",
+                name: "body",
+                label: "Fließtext",
+                options: [
+                  { value: "0.9", label: "Klein" },
+                  { value: "1", label: "Standard" },
+                  { value: "1.1", label: "Groß" },
+                  { value: "1.25", label: "Sehr groß" },
+                ],
+              },
+              {
+                type: "string",
+                name: "eyebrows",
+                label: "Kleintexte / Eyebrows",
+                options: [
+                  { value: "0.9", label: "Klein" },
+                  { value: "1", label: "Standard" },
+                  { value: "1.1", label: "Groß" },
+                  { value: "1.25", label: "Sehr groß" },
+                ],
+              },
+            ],
+          },
+
           // --- SEO ---------------------------------------------------
           {
             type: "object",

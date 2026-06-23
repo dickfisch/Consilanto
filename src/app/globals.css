@@ -90,6 +90,14 @@ body {
   font-family: var(--font-serif), Georgia, serif;
 }
 
+/* Editierbare Textgrößen-Faktoren (pro Rolle), Standard = 1.
+   Werden in HomeBody aus den Tina-Inhalten gesetzt; Standardwerte hier. */
+:root {
+  --scale-heading: 1;
+  --scale-body: 1;
+  --scale-eyebrow: 1;
+}
+
 /* Dünne Versal-Headline im Stil der Referenz */
 .display {
   font-family: var(--font-sans), sans-serif;
@@ -102,7 +110,7 @@ body {
 /* Kleines, weit gesperrtes Label */
 .eyebrow {
   font-family: var(--font-sans), sans-serif;
-  font-size: 0.7rem;
+  font-size: calc(0.7rem * var(--scale-eyebrow));
   font-weight: 500;
   letter-spacing: 0.32em;
   text-transform: uppercase;
@@ -112,7 +120,7 @@ body {
    text-dark-body (dunkle Sektionen) die Standardfarbe überschreiben können. */
 @layer base {
   .body-copy {
-    font-size: 0.95rem;
+    font-size: calc(0.95rem * var(--scale-body));
     line-height: 1.85;
     font-weight: 300;
     color: var(--color-body);

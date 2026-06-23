@@ -18,6 +18,7 @@ type Part = { text: string; italic?: boolean };
 
 /** Roh-Form der editierbaren Inhalte (Struktur von content/home/index.json). */
 export interface HomeData {
+  typeScale?: { headings?: string; body?: string; eyebrows?: string };
   seo: { title: string; description: string; shareImage: string };
   brand: { tagline: string };
   hero: { tagline: string; headlineParts: Part[]; body: string; cta: string };
@@ -121,6 +122,11 @@ const time = {
  */
 export function buildContent(home: HomeData) {
   return {
+    typeScale: {
+      headings: home.typeScale?.headings ?? "1",
+      body: home.typeScale?.body ?? "1",
+      eyebrows: home.typeScale?.eyebrows ?? "1",
+    },
     brand: {
       name: "Consilanto",
       tagline: home.brand.tagline,

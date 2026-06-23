@@ -48,7 +48,7 @@ function SerifTitle({
     <h2
       className={[
         "font-serif font-normal leading-[1.1] tracking-[-0.01em]",
-        "text-[1.9rem] lg:text-[3.5rem]",
+        "text-[calc(1.9rem*var(--scale-heading))] lg:text-[calc(3.5rem*var(--scale-heading))]",
         dark ? "text-white" : "text-ink",
         className,
       ].join(" ")}

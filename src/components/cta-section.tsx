@@ -151,7 +151,7 @@ export function CtaSection() {
             </span>
           </Reveal>
           <Reveal delay={120}>
-            <h2 className="font-serif mt-8 text-[2.1rem] lg:text-[4.2rem] font-normal leading-[1.08]">
+            <h2 className="font-serif mt-8 text-[calc(2.1rem*var(--scale-heading))] lg:text-[calc(4.2rem*var(--scale-heading))] font-normal leading-[1.08]">
               <span data-tina-field={tinaField(home.abschluss, "title")}>
                 {abschluss.title}
               </span>{" "}
@@ -211,7 +211,7 @@ export function CtaSection() {
         <div id="erstgespraech" className="mt-20 max-w-3xl scroll-mt-24">
           <Reveal>
             <h3
-              className="font-serif text-[1.6rem] lg:text-[2.6rem] font-normal"
+              className="font-serif text-[calc(1.6rem*var(--scale-heading))] lg:text-[calc(2.6rem*var(--scale-heading))] font-normal"
               data-tina-field={tinaField(home.abschluss, "cta")}
             >
               {abschluss.cta}

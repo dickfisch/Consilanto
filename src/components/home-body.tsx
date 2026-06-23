@@ -5,6 +5,7 @@
  * TinaCMS-Editor (Live-Vorschau) und stellt sie per Context bereit.
  * Ausserhalb des Editors verhält sie sich wie statisches Rendering.
  */
+import type { CSSProperties } from "react";
 import { useTina, tinaField } from "tinacms/dist/react";
 import type { HomeQuery } from "../../tina/__generated__/types";
 import { buildContent, type HomeData } from "@/lib/content";
@@ -34,9 +35,18 @@ export function HomeBody(props: {
   const home = data.home as unknown as HomeData;
   const content = buildContent(home);
 
+  // Editierbare Textgrößen-Faktoren als CSS-Variablen (skalieren ganze
+  // Textgruppen proportional; siehe .eyebrow/.body-copy/Headings in globals.css).
+  const scaleStyle = {
+    "--scale-heading": content.typeScale.headings,
+    "--scale-body": content.typeScale.body,
+    "--scale-eyebrow": content.typeScale.eyebrows,
+  } as CSSProperties;
+
   return (
     <SiteContentProvider home={home}>
-      <SiteHeader />
+      <div style={scaleStyle}>
+        <SiteHeader />
       <main>
         <Hero />
         <HeroIntro />
@@ -57,6 +67,7 @@ export function HomeBody(props: {
         <VertrauenSection />
         <CtaSection />
       </main>
+      </div>
     </SiteContentProvider>
   );
 }

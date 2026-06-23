@@ -46,7 +46,7 @@ export function Hero() {
 
           <Reveal delay={120}>
             <h1
-              className="display mt-8 text-[2.4rem] lg:text-[6.4rem] text-ink"
+              className="display mt-8 text-[calc(2.4rem*var(--scale-heading))] lg:text-[calc(6.4rem*var(--scale-heading))] text-ink"
               data-tina-field={tinaField(home.hero, "headlineParts")}
             >
               {hero.headlineParts.map((part, i) =>
