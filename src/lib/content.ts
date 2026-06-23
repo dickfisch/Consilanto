@@ -18,6 +18,7 @@ type Part = { text: string; italic?: boolean };
 
 /** Roh-Form der editierbaren Inhalte (Struktur von content/home/index.json). */
 export interface HomeData {
+  seo: { title: string; description: string; shareImage: string };
   brand: { tagline: string };
   hero: { tagline: string; headlineParts: Part[]; body: string; cta: string };
   media: { heroVideo: string; editorialImage: string; ablaufImage: string };

@@ -56,6 +56,31 @@ export default defineConfig({
           router: () => "/",
         },
         fields: [
+          // --- SEO ---------------------------------------------------
+          {
+            type: "object",
+            name: "seo",
+            label: "SEO (Suchmaschinen & Social)",
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "Seitentitel (Browser-Tab & Google)",
+              },
+              {
+                type: "string",
+                name: "description",
+                label: "Meta-Beschreibung (Google-Snippet)",
+                ui: { component: "textarea" },
+              },
+              {
+                type: "image",
+                name: "shareImage",
+                label: "Vorschaubild beim Teilen (Social/WhatsApp)",
+              },
+            ],
+          },
+
           // --- Marke -------------------------------------------------
           {
             type: "object",
