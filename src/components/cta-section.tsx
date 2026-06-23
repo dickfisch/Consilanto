@@ -104,7 +104,18 @@ function ContactForm() {
           required
           className="h-4 w-4 accent-white"
         />
-        Ich stimme der Datenschutzerklärung zu.
+        <span>
+          Ich stimme der{" "}
+          <a
+            href="/datenschutz"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 hover:text-white"
+          >
+            Datenschutzerklärung
+          </a>{" "}
+          zu.
+        </span>
       </label>
 
       {status === "error" ? (

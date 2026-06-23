@@ -213,9 +213,8 @@ export function buildContent(home: HomeData) {
       email: home.footer.email,
       phone: home.footer.phone,
       legal: [
-        { label: "Impressum", href: "#" },
-        { label: "Datenschutz", href: "#" },
-        { label: "Cookie-Einstellungen", href: "#" },
+        { label: "Impressum", href: "/impressum" },
+        { label: "Datenschutz", href: "/datenschutz" },
       ],
     },
   };
