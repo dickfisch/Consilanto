@@ -12,10 +12,15 @@ export function ImageBand({
   src,
   quote,
   cite,
+  srcField,
+  quoteField,
 }: {
   src: string;
   quote?: string;
   cite?: string;
+  /** TinaCMS-Klick-zum-Bearbeiten-Marker für Bild bzw. Zitat. */
+  srcField?: string;
+  quoteField?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -60,12 +65,20 @@ export function ImageBand({
         style={{ transform: "scale(1.34)" }}
         className="is-grayscale absolute inset-0 h-full w-full object-cover will-change-transform"
       />
-      <div className="absolute inset-0 bg-black/45" aria-hidden />
+      {/* Klick auf die dunkle Fläche → Bild austauschen */}
+      <div
+        className="absolute inset-0 bg-black/45"
+        aria-hidden
+        data-tina-field={srcField}
+      />
 
       {quote ? (
         <Container className="relative z-10 flex h-full flex-col items-center justify-center text-center">
           <span className="h-px w-12 bg-white/40" aria-hidden />
-          <p className="font-serif mt-8 max-w-3xl text-2xl italic leading-snug text-white sm:text-3xl lg:text-4xl">
+          <p
+            className="font-serif mt-8 max-w-3xl text-2xl italic leading-snug text-white sm:text-3xl lg:text-4xl"
+            data-tina-field={quoteField}
+          >
             {quote}
           </p>
           {cite ? (

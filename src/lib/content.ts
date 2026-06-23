@@ -20,7 +20,7 @@ type Part = { text: string; italic?: boolean };
 export interface HomeData {
   brand: { tagline: string };
   hero: { tagline: string; headlineParts: Part[]; body: string; cta: string };
-  media: { heroVideo: string; editorialImage: string };
+  media: { heroVideo: string; editorialImage: string; ablaufImage: string };
   person: {
     eyebrow: string;
     title: string;
@@ -136,6 +136,7 @@ export function buildContent(home: HomeData) {
     media: {
       heroVideo: home.media.heroVideo,
       editorialImage: home.media.editorialImage,
+      ablaufImage: home.media.ablaufImage,
     },
     ROMAN,
     person: {

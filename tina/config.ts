@@ -101,6 +101,11 @@ export default defineConfig({
                 name: "editorialImage",
                 label: "Editorial-Bild (Bild-Band & Hero-Poster)",
               },
+              {
+                type: "image",
+                name: "ablaufImage",
+                label: "Ablauf-Hintergrundbild (So arbeiten wir zusammen)",
+              },
             ],
           },
 

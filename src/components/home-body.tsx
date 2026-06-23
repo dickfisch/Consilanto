@@ -5,7 +5,7 @@
  * TinaCMS-Editor (Live-Vorschau) und stellt sie per Context bereit.
  * Ausserhalb des Editors verhält sie sich wie statisches Rendering.
  */
-import { useTina } from "tinacms/dist/react";
+import { useTina, tinaField } from "tinacms/dist/react";
 import type { HomeQuery } from "../../tina/__generated__/types";
 import { buildContent, type HomeData } from "@/lib/content";
 import { SiteContentProvider } from "@/lib/site-content";
@@ -48,6 +48,8 @@ export function HomeBody(props: {
           src={content.media.editorialImage}
           quote={content.brand.tagline}
           cite="Consilanto"
+          srcField={tinaField(home.media, "editorialImage")}
+          quoteField={tinaField(home.brand, "tagline")}
         />
         <AngebotSection />
         <AblaufSection />

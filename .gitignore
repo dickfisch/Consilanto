@@ -44,8 +44,5 @@ next-env.d.ts
 _*.mjs
 
 # TinaCMS — generierte Artefakte (werden beim Build neu erzeugt)
-tina/__generated__/*
-!tina/__generated__/_graphql.json
-!tina/__generated__/_lookup.json
-!tina/__generated__/_schema.json
+tina/__generated__/
 /public/admin

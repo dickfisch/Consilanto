@@ -6,7 +6,7 @@ import { Reveal } from "./reveal";
 import { useSiteContent, useTinaHome } from "@/lib/site-content";
 
 export function AblaufSection() {
-  const { ablauf, ROMAN } = useSiteContent();
+  const { ablauf, ROMAN, media } = useSiteContent();
   const home = useTinaHome();
   return (
     <section
@@ -16,7 +16,7 @@ export function AblaufSection() {
       {/* EIN durchgehendes Bild über die ganze Sektion (Platzhalter). */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/img/erol-key.jpg"
+        src={media.ablaufImage}
         alt=""
         aria-hidden
         className="is-grayscale absolute inset-0 h-full w-full object-cover"

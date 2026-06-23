@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useSiteContent } from "@/lib/site-content";
+import { tinaField } from "tinacms/dist/react";
+import { useSiteContent, useTinaHome } from "@/lib/site-content";
 
 /**
  * Hero-Hintergrundvideo. iOS zeigt sonst einen Play-Button, wenn das Autoplay
@@ -10,6 +11,7 @@ import { useSiteContent } from "@/lib/site-content";
  */
 export function HeroVideo() {
   const { media } = useSiteContent();
+  const home = useTinaHome();
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -33,6 +35,7 @@ export function HeroVideo() {
   return (
     <video
       ref={ref}
+      data-tina-field={tinaField(home.media, "heroVideo")}
       className="is-grayscale h-full w-full object-cover [-webkit-mask-image:linear-gradient(to_right,transparent,#000_38%)] [mask-image:linear-gradient(to_right,transparent,#000_38%)]"
       autoPlay
       muted

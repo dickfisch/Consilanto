@@ -25,7 +25,8 @@
   },
   "media": {
     "heroVideo": "/media/hero.mp4",
-    "editorialImage": "/img/Key_Aerzte.jpg"
+    "editorialImage": "/img/Key_Aerzte.jpg",
+    "ablaufImage": "/img/erol-key.jpg"
   },
   "person": {
     "eyebrow": "Die Beratung",
